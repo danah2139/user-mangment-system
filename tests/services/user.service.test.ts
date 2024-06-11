@@ -1,10 +1,11 @@
+import '../setup'; // Ensure this is at the top
 import { expect } from 'chai';
 import { createUser, findUserByEmail } from '../../src/services/user.service';
-import User from '../../src/models/user.model';
+import sequelize from '../../src/models';
 
 describe('User Service', () => {
   before(async () => {
-    await User.sync({ force: true });
+    await sequelize.sync({ force: true });
   });
 
   it('should create a new user', async () => {

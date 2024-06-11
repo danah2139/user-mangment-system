@@ -1,13 +1,14 @@
+import '../setup'; // Ensure this is at the top
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../src/app';
-import User from '../../src/models/user.model';
+import sequelize from '../../src/models';
 
 let token: string;
 
 describe('Auth Endpoints', () => {
   before(async () => {
-    await User.sync({ force: true });
+    await sequelize.sync({ force: true });
   });
 
   describe('POST /api/auth/register', () => {
@@ -45,5 +46,3 @@ describe('Auth Endpoints', () => {
     });
   });
 });
-
-
