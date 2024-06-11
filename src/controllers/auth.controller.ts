@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';  // Ensure bcrypt is imported correctly
+import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwt';
 import { createUser, findUserByEmail } from '../services/user.service';
 import { AuthRequest } from '../types/auth';
+import { validateRegister, validateLogin } from '../utils/validation';
 
 export const register = async (req: AuthRequest, res: Response): Promise<Response> => {
-    const { name, email, password } = req.body;
+    const { error } = validateRegister(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
 
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
-    }
+    const { name, email, password } = req.body;
 
     try {
         const newUser = await createUser({ name, email, password });
@@ -20,6 +20,9 @@ export const register = async (req: AuthRequest, res: Response): Promise<Respons
 };
 
 export const login = async (req: AuthRequest, res: Response): Promise<Response> => {
+    const { error } = validateLogin(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
     const { email, password } = req.body;
 
     try {

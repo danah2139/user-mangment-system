@@ -10,10 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
-    "paths": {
-      "*": ["src/*"]
-    }
+    "types": ["node", "mocha"]  // Add "mocha" here
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
