@@ -98,11 +98,11 @@ To handle increased load and ensure high availability, the service can be design
     ```
 3. **Set up environment variables**:
     Create a .env file in the root of your project and configure the required environment variables.
-4.**Run the application**:
+4. **Run the application**:
    ```sh
     npm start
    ```
-5.**Run tests**:
+5. **Run tests**:
    ```sh
     npm test
    ```
